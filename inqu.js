@@ -1,25 +1,23 @@
 import inquirer from "inquirer";
-import { game } from "./InquirerProject/function";
 
-const questions = [
-  {
-    type: "list",
+const func = async () => {
+  let { result } = await inquirer.prompt({
     name: "result",
-    message: "Which door would like to go through",
+    type: "list",
+    message: "Choose a door to go through?",
     choices: ["A", "B", "C"],
-  },
-];
-function ask() {
-  inquirer.prompt(questions).then((answer) => {
-    console.log(questions.result);
-    if (answer.result === "A") {
-      console.log("You are close");
-    } else if (answer.result === "B") {
-      console.log("You are in the corridor");
-    } else {
-      console.log("you lost the game");
-    }
   });
-}
+  return result;
+};
+const display = async () => {
+  let response = await func();
+  if (response === "A") {
+    console.log("You're almost there");
+  } else if (response === "B") {
+    console.log(`do you want to turn left or right`);
+  } else {
+    console.log("Sorry You failed ");
+  }
+};
 
-ask();
+display();
