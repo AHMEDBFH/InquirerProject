@@ -33,14 +33,11 @@ const display = async () => {
   let response = await func();
   if (response === "A") {
     resA();
-    if (resA === "left") {
-      console.log("you managed to escape");
-    } else "Sorry you got caught";
   } else if (response === "B") {
-    console.log(`do you want to turn left or right`);
+    resB();
   } else {
-    console.log("Sorry You failed ");
+    console.log("Sorry there is no way through");
   }
 };
 
-display(resA);
+display();
