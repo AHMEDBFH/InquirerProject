@@ -5,38 +5,38 @@ export const func = async () => {
     name: "result",
     type: "list",
     message: "Choose a door to go through?",
-    choices: ["A", "B", "C"],
+    choices: ["A", "B", "C", "D"],
   });
   return result;
 };
 export const resA = async () => {
-  let { object } = await inquirer.prompt({
+  let { result } = await inquirer.prompt({
     name: "result",
     type: "list",
-    message: "There is only 2 ways pick one?",
-    choices: ["left", "right"],
+    message: "Choose a direction?",
+    choices: ["left", "right", "straight"],
   });
-  return object;
-};
-
-export const resB = async () => {
-  let { object } = await inquirer.prompt({
-    name: "result",
-    type: "list",
-    message: "which way do you want to go?",
-    choices: ["straight", "left"],
-  });
-  return object;
+  return result;
 };
 
 const display = async () => {
   let response = await func();
   if (response === "A") {
-    resA();
+    let choice = await resA();
+    if (choice !== "right" && choice !== "Straight") {
+      console.log("You managed to escape the room");
+    } else {
+      console.log("Sorry, there is no way through, try another time");
+    }
   } else if (response === "B") {
-    resB();
+    let choice = await resA();
+    if (choice === "left") {
+      console.log("You managed to escape the room");
+    } else {
+      console.log("Sorry you lost");
+    }
   } else {
-    console.log("Sorry there is no way through");
+    console.log("Not today try another time");
   }
 };
 
